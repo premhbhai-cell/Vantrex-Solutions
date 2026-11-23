@@ -3,7 +3,7 @@
 var ROOT=document.documentElement.getAttribute('data-root')||'./';
 var P=window.PRODUCTS||[];
 var BY={};P.forEach(function(p){BY[p.slug]=p;});
-var CATS=[['building-materials','Building Materials'],['hardware-tools','Hardware & Tools'],['electrical','Electrical'],['plumbing','Plumbing'],['safety','Safety'],['industrial','Industrial']];
+var CATS=[['building-materials','Building Materials'],['hardware-tools','Hardware & Tools'],['electrical','Electrical'],['plumbing','Plumbing'],['safety','Safety'],['industrial','Industrial'],['fasteners','Fasteners'],['sanitaryware','Sanitaryware'],['pipes-fittings','Pipes & Fittings'],['paints-chemicals','Paints & Chemicals']];
 var mem={};
 function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return mem[k]!==undefined?mem[k]:d;}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){mem[k]=v;}}
@@ -42,13 +42,13 @@ function slugOf(el){var card=el.closest('.group,article,[class*="rounded-2xl"]')
 
 /* card template */
 function card(p){var o=off(p);
- return '<article class="vs-card"><a class="vs-img" href="'+href(p.slug)+'" aria-label="'+esc(p.name)+'"><img loading="lazy" src="'+img(p)+'" alt="'+esc(p.name)+'">'+(o?'<span class="vs-badge">'+o+'% OFF</span>':'')+(p.badge?'<span class="vs-badge2">'+esc(p.badge)+'</span>':'')+'</a>'+
+ return '<article class="vs-card"><a class="vs-img" href="'+href(p.slug)+'" aria-label="'+esc(p.name)+'"><img loading="lazy" src="'+img(p)+'" alt="'+esc(p.name)+'">'+(p.badge?'<span class="vs-badge2">'+esc(p.badge)+'</span>':'')+'</a>'+
  '<button type="button" class="vs-heart" data-wish="'+p.slug+'" aria-label="Save '+esc(p.name)+' to wishlist">'+heartSvg+'</button>'+
  '<div class="vs-body"><div class="vs-meta"><span>'+esc(p.brand)+'</span><span>'+esc(p.sku)+'</span></div>'+
  '<a class="vs-title" href="'+href(p.slug)+'">'+esc(p.name)+'</a>'+
  (p.rating?'<div class="vs-stars">'+stars(p.rating)+'<small>'+p.rating.toFixed(1)+' ('+p.reviews+')</small></div>':'')+
- '<div class="vs-price"><b>'+inr(p.price)+'</b>'+(p.mrp?'<s>'+inr(p.mrp)+'</s>':'')+'<small>/ '+esc(p.unit)+'</small></div>'+
- '<div class="vs-actions"><button class="vs-btn primary" data-add="'+p.slug+'">Add to Cart</button><a class="vs-btn ghost" href="'+href(p.slug)+'">Details</a></div></div></article>';}
+ '<div class="vs-quote-note">Wholesale supply · Price on request</div>'+
+ '<div class="vs-actions"><a class="vs-btn primary" href="'+ROOT+'quote.html?product='+encodeURIComponent(p.name)+'">Request Quote</a><a class="vs-btn ghost" href="'+href(p.slug)+'">View Details</a></div></div></article>';}
 
 /* pages */
 function q(name){return new URLSearchParams(location.search).get(name)||'';}
@@ -66,7 +66,7 @@ function renderShop(m){
  function draw(){var l=list();
   var chips='<a class="vs-chip'+(!cat&&!deals?' on':'')+'" href="shop.html">All</a>'+CATS.filter(function(c){return P.some(function(p){return p.cat===c[0];});}).map(function(c){return '<a class="vs-chip'+(cat===c[0]?' on':'')+'" href="shop.html?cat='+c[0]+'">'+c[1]+'</a>';}).join('')+'<a class="vs-chip'+(deals?' on':'')+'" href="shop.html?deals=1">🔥 Offers</a>';
   m.innerHTML='<div class="vs-wrap"><div class="vs-crumbs"><a href="'+ROOT+'index.html">Home</a> / Shop</div><h1 class="vs-h1">'+esc(title)+'</h1><p class="vs-sub">'+l.length+' product'+(l.length===1?'':'s')+'</p>'+
-   '<div class="vs-toolbar"><div class="vs-chips">'+chips+'</div><select class="vs-select" id="vs-sort"><option value="rel">Sort: Featured</option><option value="lo">Price: Low to High</option><option value="hi">Price: High to Low</option><option value="off">Biggest Discount</option></select></div>'+
+   '<div class="vs-toolbar"><div class="vs-chips">'+chips+'</div><select class="vs-select" id="vs-sort"><option value="rel">Sort: Featured</option></select></div>'+
    (l.length?'<div class="vs-grid">'+l.map(card).join('')+'</div>':'<div class="vs-empty"><h2>No products found</h2><p>Try a different search or category.</p><p style="margin-top:1rem"><a class="vs-btn primary" href="shop.html">View all products</a></p></div>')+'</div>';
   var s=document.getElementById('vs-sort');s.value=sort;s.onchange=function(){sort=s.value;draw();};
   syncHearts();}
@@ -82,19 +82,13 @@ function renderProduct(m){
  '<div class="vs-detail"><div class="big"><img src="'+img(p)+'" alt="'+esc(p.name)+'"></div><div class="vs-info">'+
  '<div class="vs-meta"><span>'+esc(p.brand)+'</span><span>SKU: '+esc(p.sku)+'</span></div><h1>'+esc(p.name)+'</h1>'+
  (p.rating?'<div class="vs-stars">'+stars(p.rating)+'<small>'+p.rating.toFixed(1)+' · '+p.reviews+' reviews</small></div>':'')+
- '<div class="price"><b>'+inr(p.price)+'</b>'+(p.mrp?'<s>'+inr(p.mrp)+'</s>':'')+(o?'<span class="off">'+o+'% OFF</span>':'')+'</div><div class="vs-sub" style="margin:-.5rem 0 1rem">Inclusive of taxes · per '+esc(p.unit)+'</div>'+
+ '<div class="vs-quote-note">Bulk / wholesale pricing available on request</div>'+
  '<p class="d">'+esc(p.desc)+'</p>'+
- '<div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.5rem"><div class="vs-qty"><button id="qm" aria-label="Decrease">−</button><span id="qv">1</span><button id="qp" aria-label="Increase">+</button></div>'+
- '<button class="vs-btn primary lg" id="addb" style="flex:1;min-width:150px">Add to Cart</button><button class="vs-btn gold lg" id="buyb">Buy Now</button><button class="vs-heart" style="position:static" data-wish="'+p.slug+'" aria-label="Save to wishlist">'+heartSvg+'</button></div>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;margin-top:1.5rem"><a class="vs-btn primary lg" href="quote.html?product='+encodeURIComponent(p.name)+'">Request Bulk Quote</a><a class="vs-btn gold lg" href="quote.html?product='+encodeURIComponent(p.name)+'">Contact Sales Team</a><button class="vs-heart" style="position:static" data-wish="'+p.slug+'" aria-label="Save to wishlist">'+heartSvg+'</button></div>'+
  '<div class="vs-perks"><div>🚚 Fast site delivery</div><div>🔒 Secure payments</div><div>✅ Quality checked</div><div>🎧 Expert support</div></div>'+
  '<div class="vs-specs"><div><span>Brand</span><span>'+esc(p.brand)+'</span></div><div><span>SKU</span><span>'+esc(p.sku)+'</span></div><div><span>Category</span><span>'+esc(catName)+'</span></div><div><span>Sold per</span><span>'+esc(p.unit)+'</span></div></div>'+
  '</div></div>'+
  '<h2 class="vs-h1" style="margin:3rem 0 1rem;font-size:1.4rem">You may also like</h2><div class="vs-grid">'+rel.map(card).join('')+'</div></div>';
- var qv=document.getElementById('qv');
- document.getElementById('qm').onclick=function(){if(qty>1)qv.textContent=--qty;};
- document.getElementById('qp').onclick=function(){qv.textContent=++qty;};
- document.getElementById('addb').onclick=function(){addToCart(slug,qty);};
- document.getElementById('buyb').onclick=function(){addToCart(slug,qty);location.href='cart.html';};
  syncHearts();}
 
 function renderCart(m){
@@ -105,16 +99,13 @@ function renderCart(m){
   if(coupon==='VANTREX10'&&sub>=1000)disc=Math.round(sub*.10);if(coupon==='BUILD500'&&sub>=5000)disc=500;
   var total=sub-disc+ship;
   m.innerHTML='<div class="vs-wrap"><div class="vs-crumbs"><a href="'+ROOT+'index.html">Home</a> / Cart</div><h1 class="vs-h1">Shopping Cart</h1><p class="vs-sub">'+n+' item'+(n>1?'s':'')+' in your cart</p><div class="vs-cart" style="margin-top:1.5rem"><div>'+
-  items.map(function(s){var p=BY[s];return '<div class="vs-row"><a href="'+href(s)+'"><img src="'+img(p)+'" alt=""></a><div class="grow"><a href="'+href(s)+'">'+esc(p.name)+'</a><div class="vs-sub">SKU '+esc(p.sku)+'</div><div style="font-weight:800;color:var(--navy);margin-top:.3rem">'+inr(p.price)+' <small style="font-weight:500;color:var(--muted-foreground)">/ '+esc(p.unit)+'</small></div></div>'+
-   '<div class="vs-qty"><button data-q="-1" data-s="'+s+'">−</button><span>'+c[s]+'</span><button data-q="1" data-s="'+s+'">+</button></div><div style="font-weight:800;min-width:90px;text-align:right">'+inr(p.price*c[s])+'</div><button class="rm" data-rm="'+s+'">Remove</button></div>';}).join('')+
+  items.map(function(s){var p=BY[s];return '<div class="vs-row"><a href="'+href(s)+'"><img src="'+img(p)+'" alt=""></a><div class="grow"><a href="'+href(s)+'">'+esc(p.name)+'</a><div class="vs-sub">SKU '+esc(p.sku)+'</div><div class="vs-sub">Wholesale pricing shared on quotation</div></div>'+
+   '<div class="vs-qty"><button data-q="-1" data-s="'+s+'">−</button><span>'+c[s]+'</span><button data-q="1" data-s="'+s+'">+</button></div><button class="rm" data-rm="'+s+'">Remove</button></div>';}).join('')+
   '<a class="vs-btn ghost" href="shop.html" style="margin-top:.5rem">← Continue shopping</a></div>'+
-  '<aside class="vs-sum"><h2>Order Summary</h2><div class="l"><span>Subtotal</span><span>'+inr(sub)+'</span></div>'+(mrp>sub?'<div class="l ok"><span>You save</span><span>'+inr(mrp-sub)+'</span></div>':'')+(disc?'<div class="l ok"><span>Coupon ('+coupon+')</span><span>− '+inr(disc)+'</span></div>':'')+'<div class="l"><span>Delivery</span><span>'+(ship?inr(ship):'<b class="ok">FREE</b>')+'</span></div><div class="l t"><span>Total</span><span>'+inr(total)+'</span></div>'+
-  '<div style="display:flex;gap:.5rem;margin-top:1rem"><input class="vs-input" id="cpn" placeholder="Coupon code" style="flex:1;min-width:0" value="'+esc(coupon)+'"><button class="vs-btn ghost" id="cpb">Apply</button></div>'+
-  '<button class="vs-btn primary lg" id="chk" style="width:100%;margin-top:1rem">Proceed to Checkout</button></aside></div></div>';
+  '<aside class="vs-sum"><h2>Bulk Enquiry</h2><p class="vs-sub">Retail prices are not displayed. Send your selected products and quantities to receive a wholesale quotation.</p><a class="vs-btn primary lg" href="../quote.html" style="width:100%;margin-top:1rem">Request Wholesale Quote</a></aside></div></div>';
   m.querySelectorAll('[data-q]').forEach(function(b){b.onclick=function(){var s=b.getAttribute('data-s');setQty(s,cart()[s]+parseInt(b.getAttribute('data-q'),10));draw();};});
   m.querySelectorAll('[data-rm]').forEach(function(b){b.onclick=function(){setQty(b.getAttribute('data-rm'),0);draw();};});
-  document.getElementById('cpb').onclick=function(){var v=document.getElementById('cpn').value.trim().toUpperCase();if(v==='VANTREX10'||v==='BUILD500'){save('vs_coupon',v);toast('Coupon applied');}else{save('vs_coupon','');toast('Invalid coupon');}draw();};
-  document.getElementById('chk').onclick=function(){renderCheckout(m);window.scrollTo(0,0);};}
+}
  draw();}
 
 
@@ -130,7 +121,7 @@ function calcTotals(){
  if(coupon==='VANTREX10'&&sub>=1000)disc=Math.round(sub*.10);if(coupon==='BUILD500'&&sub>=5000)disc=500;
  return {c:c,items:items,sub:sub,ship:ship,disc:disc,coupon:coupon,total:sub-disc+ship};}
 
-function renderCheckout(m){
+function renderCheckout(m){m.innerHTML='<div class="vs-wrap"><h1 class="vs-h1">Wholesale enquiries only</h1><p class="vs-sub">Online retail checkout is disabled. Please request a bulk quotation.</p><a class="vs-btn primary" href="../quote.html">Request Wholesale Quote</a></div>';return;
  var T=calcTotals();
  if(!T.items.length){location.href='cart.html';return;}
  var u=load('vs_user',{}),last=load('vs_last_addr',{});
@@ -229,8 +220,14 @@ document.addEventListener('click',function(e){
  if(b&&/^Add to Cart$/i.test((b.textContent||'').trim())&&!b.hasAttribute('data-add')){var s=slugOf(b);if(s){e.preventDefault();addToCart(s);return;}}
  if(b&&/^Save .* to wishlist$/.test(b.getAttribute('aria-label')||'')){var s2=slugOf(b);if(s2){e.preventDefault();toggleWish(s2);return;}}
  if(b&&b.getAttribute('aria-label')==='Open menu'){e.preventDefault();openMenu();return;}
+ if(b&&b.getAttribute('aria-label')==='Close menu'){e.preventDefault();closeMenu();return;}
 });
-function openMenu(){var d=document.querySelector('.vs-drawer');if(!d){d=document.createElement('div');d.className='vs-drawer';d.innerHTML='<div class="bg"></div><nav><a href="'+ROOT+'index.html">Home</a><a href="'+ROOT+'pages/shop.html">All Products</a>'+CATS.filter(function(c){return P.some(function(p){return p.cat===c[0];});}).map(function(c){return '<a href="'+ROOT+'pages/shop.html?cat='+c[0]+'">'+c[1]+'</a>';}).join('')+'<a href="'+ROOT+'pages/shop.html?deals=1">🔥 Offers &amp; Deals</a><a href="'+ROOT+'pages/wishlist.html">Wishlist</a><a href="'+ROOT+'pages/cart.html">Cart</a><a href="'+ROOT+'pages/auth.html">Sign in / Register</a></nav>';document.body.appendChild(d);d.querySelector('.bg').onclick=function(){d.classList.remove('open');};}d.classList.add('open');}
+function openMenu(){
+ var d=document.querySelector('.vs-drawer');
+ if(!d){d=document.createElement('div');d.className='vs-drawer';var links=[['Home',ROOT+'index.html'],['All Products',ROOT+'pages/shop.html'],['Building Materials',ROOT+'pages/shop.html?cat=building-materials'],['Hardware & Tools',ROOT+'pages/shop.html?cat=hardware-tools'],['Electrical',ROOT+'pages/shop.html?cat=electrical'],['Plumbing',ROOT+'pages/shop.html?cat=plumbing'],['Safety',ROOT+'pages/shop.html?cat=safety'],['Industrial',ROOT+'pages/shop.html?cat=industrial'],['Fasteners',ROOT+'pages/shop.html?cat=fasteners'],['Sanitaryware',ROOT+'pages/shop.html?cat=sanitaryware'],['Pipes & Fittings',ROOT+'pages/shop.html?cat=pipes-fittings'],['Paints & Chemicals',ROOT+'pages/shop.html?cat=paints-chemicals'],['Offers & Deals',ROOT+'pages/shop.html?deals=1'],['Company',ROOT+'pages/company.html'],['Import / Export',ROOT+'pages/import-export.html'],['Request a Quote',ROOT+'pages/quote.html'],['Wishlist',ROOT+'pages/wishlist.html'],['Cart',ROOT+'pages/cart.html'],['Sign in / Register',ROOT+'pages/auth.html']];
+ d.innerHTML='<div class="bg"></div><nav aria-label="Main mobile navigation"><div class="vs-drawer-head"><strong>VANTREX SOLUTIONS</strong><button type="button" class="vs-drawer-close" aria-label="Close menu">×</button></div>'+links.map(function(x){return '<a href="'+x[1]+'">'+x[0]+'</a>';}).join('')+'</nav>';document.body.appendChild(d);d.querySelector('.bg').onclick=closeMenu;d.querySelector('.vs-drawer-close').onclick=closeMenu;d.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',closeMenu);});}
+ d.classList.add('open');document.body.classList.add('vs-menu-open');}
+function closeMenu(){var d=document.querySelector('.vs-drawer');if(d)d.classList.remove('open');document.body.classList.remove('vs-menu-open');}
 
 /* search forms */
 document.addEventListener('submit',function(e){var f=e.target;if(f.getAttribute('role')==='search'){e.preventDefault();var i=f.querySelector('input');location.href=ROOT+'pages/shop.html?q='+encodeURIComponent(i?i.value.trim():'');}});

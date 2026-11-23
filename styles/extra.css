@@ -135,3 +135,23 @@
 .vs-faq-i.open .vs-faq-q span{transform:rotate(45deg)}
 .vs-faq-a{display:none;padding:0 1.2rem 1.1rem;color:var(--muted-foreground);line-height:1.6;font-size:.93rem}
 .vs-faq-i.open .vs-faq-a{display:block}
+\n/* Wholesale catalogue: quotation-led, no public prices */\n.vs-quote-note{font-weight:800;color:#17345f;background:#f3f6fb;border:1px solid #e0e7f0;border-radius:10px;padding:11px 13px;margin:14px 0;font-size:.9rem}.vs-price,.vs-info .price{display:none!important}.vs-card .vs-actions{grid-template-columns:1fr 1fr}\n
+/* VANTREX WHOLESALE MODE */
+[data-tsd-source*="ProductCard.tsx:60"],[data-tsd-source*="ProductCard.tsx:61"],
+[data-tsd-source*="ProductCard.tsx:62"],[data-tsd-source*="ProductCard.tsx:63"],
+.vs-price,.vs-badge:not(.vs-badge2){display:none!important}
+.vs-quote-note{font-size:.82rem;font-weight:700;color:var(--royal);background:var(--royal-soft);border-radius:.6rem;padding:.55rem .7rem}
+@media(max-width:767px){
+ html,body{max-width:100%;overflow-x:hidden}
+ .vs-wrap{padding:1.25rem .9rem!important}
+ .vs-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:.7rem!important}
+ .vs-body{padding:.75rem!important}
+ .vs-title{font-size:.85rem!important}
+ .vs-actions{flex-direction:column}
+ .vs-btn{min-height:40px;padding:.55rem .7rem;font-size:.78rem}
+ .vs-cart{grid-template-columns:1fr!important}
+ .vs-sum{position:static!important}
+}
+
+/* Unified mobile navigation drawer */
+.vs-drawer{position:fixed;inset:0;z-index:9999;display:none}.vs-drawer.open{display:block}.vs-drawer .bg{position:absolute;inset:0;background:rgba(8,18,42,.58);backdrop-filter:blur(2px)}.vs-drawer nav{position:absolute;right:0;top:0;bottom:0;width:min(86vw,360px);background:#fff;padding:1rem 1rem 2rem;overflow-y:auto;display:flex;flex-direction:column;gap:.25rem;box-shadow:-12px 0 36px rgba(0,0,0,.18);padding-top:max(1rem,env(safe-area-inset-top))}.vs-drawer .vs-drawer-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.4rem .25rem 1rem;margin-bottom:.35rem;border-bottom:1px solid #e7eaf0;color:var(--navy)}.vs-drawer .vs-drawer-close{border:0;background:#f1f3f7;border-radius:10px;width:38px;height:38px;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--navy)}.vs-drawer nav a{display:block;padding:.78rem .85rem;border-radius:.65rem;font-weight:700;color:var(--navy);text-decoration:none}.vs-drawer nav a:hover,.vs-drawer nav a:focus{background:#eef2f8}body.vs-menu-open{overflow:hidden}
