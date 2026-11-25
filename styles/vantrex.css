@@ -107,3 +107,31 @@ hr{border:0;border-top:1px solid #e3e6ec;margin:0}
   .footer-grid{grid-template-columns:1fr!important;gap:30px!important}
   .footer-bottom-inner{text-align:center}
 }
+
+
+/* Homepage image matching and consistent crops */
+.hero-main-bg img{
+  width:100%;
+  height:100vh;
+  object-fit:cover;
+  object-position:center;
+}
+.Who-we-are-content-info-left > img{
+  display:block;
+  width:100%;
+  height:700px;
+  object-fit:cover;
+  object-position:center;
+}
+.our-products-slider .slider-card > a > img{
+  display:block;
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  object-position:center;
+}
+@media(max-width:767px){
+  .hero-main-bg img{height:620px;min-height:620px;}
+  .Who-we-are-content-info-left > img{height:380px;}
+  .our-products-slider .slider-card > a > img{height:210px;}
+}
