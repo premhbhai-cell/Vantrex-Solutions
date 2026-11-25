@@ -1,0 +1,109 @@
+/* ===== Vantrex Solutions – overrides (same design, rebranded + responsive) ===== */
+html{scroll-behavior:smooth}
+body{-webkit-text-size-adjust:100%}
+img{max-width:100%}
+
+/* Logo */
+.logo{max-width:none}
+.logo img{height:46px;width:auto;max-width:none;object-fit:contain}
+.mob-header-logo a img{height:44px;width:auto;max-width:none;object-fit:contain}
+.footer-brand .logo-wrap img{height:64px;width:auto;max-width:100%;object-fit:contain}
+.footer-socials{display:none}
+
+/* Desktop nav (>=1440px) */
+.header-inner{gap:14px}
+.header-links ul{gap:15px}
+.header-links ul li a{font-size:11px;letter-spacing:.03em;white-space:nowrap}
+.header-links ul li.current-menu-item a::after,.header-links ul li a:hover::after{width:100%}
+.header-links ul li.current-menu-item a{color:var(--turkish)}
+.nav-cta{white-space:nowrap;display:inline-block}
+.main-header .container-main{padding:0 24px;max-width:1600px}
+.main-header .nav-cta{padding:12px 14px;font-size:12px}
+
+/* Burger menu below 1440px (9 links need the space) */
+@media (max-width:1439px){
+  .main-header .header-inner{display:none}
+  .main-header,.main-header.scrolled{padding:0}
+  .mob-header{display:block;width:100%;z-index:10;transition:.3s;box-shadow:0 2px 3px rgba(0,0,0,.15);background:#fff}
+  .mob-header .navbar{background:var(--white);padding:12px 0}
+  .container-fluid{padding:0 28px}
+  .mob-header .navbar-toggler{padding:0;border:0}
+  .mob-header .navbar-toggler:focus{box-shadow:none}
+  .mob-header .navbar-toggler-icon{background-image:url(../images/menu-icon.webp);background-repeat:no-repeat;background-size:contain;width:27px;height:27px}
+  body.menu-open .mob-header .navbar-toggler-icon{background-image:url(../images/close-icon.webp)}
+  .mob-header .navbar-collapse{max-height:calc(100vh - 76px);overflow-y:auto;-webkit-overflow-scrolling:touch;width:100%}
+  .mob-header .navbar-nav{padding:14px 0 6px}
+  .mob-header .nav-link{display:block;padding:11px 0;font-size:15px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid #eef0f4}
+  .mob-header .nav-link a{color:var(--phantom);display:block}
+  .mob-header .nav-link.current-menu-item a{color:var(--turkish)}
+  .header-cta-mob{padding:14px 0 22px}
+  .header-cta-mob .nav-cta{display:block;text-align:center}
+  body.menu-open{overflow:hidden}
+}
+@media (min-width:1440px){.mob-header{display:none!important}}
+
+/* Hero / page hero */
+.vx-page-hero .hero-title{text-align:center}
+.vx-page-hero .hero-desc p{color:#fff;opacity:.85;margin-top:10px;font-size:18px;text-align:center}
+.about-hero-main-bg img{min-height:260px}
+.hero-main-bg img{object-fit:cover}
+
+/* Product blocks */
+.product-detail-image img{border-radius:6px;min-height:260px;max-height:460px}
+.product-features-list{margin-top:6px}
+.product-feature span{font-size:15px}
+hr{border:0;border-top:1px solid #e3e6ec;margin:0}
+.download-brochure-btn{display:inline-flex;align-items:center;gap:10px}
+
+/* About grid */
+.vx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.vx-grid .quality-rnd-focus-card{display:block;color:inherit;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.vx-grid .quality-rnd-focus-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.1)}
+.quality-process-main{padding:var(--section-pad) 0;background:var(--off-white)}
+
+/* Contact form */
+.form-group select{width:100%;border:1px solid rgba(255,255,255,.15);outline:none;background:rgba(255,255,255,.1);padding:16px 20px;border-radius:14px;color:#fff;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.form-group select option{color:#1e1d22}
+.form-group input,.form-group textarea{font-family:inherit;font-size:15px}
+.contact-page-form button{margin-bottom:12px}
+.contact-page-form .vx-alt-btn{background:transparent;border:2px solid #fff;margin-bottom:0}
+.vx-form-note{color:#fff;font-size:14px;margin-top:14px;min-height:20px}
+.contact-info-item a,.contact-info-item span{word-break:break-word}
+.contact-page-info .section-title{margin-bottom:20px}
+.contact-icon{background:#fff}
+
+/* Footer */
+.footer-info-call-add li{margin-bottom:10px}
+.footer-info-call-add a{word-break:break-word}
+.footer-info-call-add i{margin-right:6px}
+
+/* Regions (touch) */
+.region-count{cursor:pointer}
+
+/* Tablet */
+@media (max-width:991px){
+  .contact-page-wrapper{grid-template-columns:1fr;gap:40px}
+  .vx-grid{grid-template-columns:repeat(2,1fr)}
+  .product-detail-wrapper{grid-template-columns:1fr}
+  .container-main{padding:0 30px}
+  .main-header .container-main{padding:0 30px}
+}
+/* Mobile */
+@media (max-width:600px){
+  :root{--section-pad:50px}
+  .container-main{padding:0 18px}
+  .container-fluid{padding:0 18px}
+  .vx-grid{grid-template-columns:1fr}
+  .product-features-list{grid-template-columns:1fr}
+  .contact-page-form{padding:28px 20px;border-radius:22px}
+  .contact-page-form h3{font-size:26px}
+  .contact-info-item{padding:18px;gap:14px}
+  .contact-info-item a{font-size:15px}
+  .contact-icon{width:50px;height:50px}
+  .vx-page-hero .hero-desc p{font-size:15px}
+  .mob-header-logo a img{height:38px}
+  .whatsapp-sticky img{right:16px!important;bottom:16px!important;width:52px!important;height:52px!important}
+  .product-detail-image img{min-height:200px}
+  .footer-grid{grid-template-columns:1fr!important;gap:30px!important}
+  .footer-bottom-inner{text-align:center}
+}

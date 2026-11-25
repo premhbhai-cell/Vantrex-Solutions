@@ -1,0 +1,388 @@
+/*
+Theme Name: Essen Global
+Theme URI: http://localhost/essen-global/
+Author: Green Cubes
+Author URI: http://localhost/essen-global/
+Description: Custom WordPress theme designed for Essen Global LLP, an international import, export,and trading company.
+Version: 1.0
+*/
+
+
+
+.whatsapp-sticky img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	position: fixed;
+	right: 40px;
+	bottom: 40px;
+	z-index: 20;
+}
+
+.contact-form-group.button .wpcf7-submit {
+	width: 100%;
+	border: none;
+	outline: none;
+	background: var(--phantom);
+	color: var(--white);
+	padding: 18px;
+	border-radius: 16px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.4s ease;
+}
+
+.menu .current_page_item a {
+	color: var(--turkish);
+}
+
+.mob-header .mobile-menu a {
+	color: var(--blue-color);
+}
+
+#menu-mobile-menu li a {
+	color: var(--turkish) !important;
+}
+
+.q-icon img{
+	width: 34px;
+	height: 34px;
+}
+
+.why-choose-card-icon img{
+	width: 40px;
+	height: 40px;
+}
+
+.why-choose-card:hover img{
+	filter: brightness(0) invert(1);
+}
+
+.quality-rnd-v2-icon img{
+	width: 40px;
+	height: 40px;
+}
+
+
+.quality-process-icon img{
+	width: 40px;
+	height: 40px;
+}
+
+.quality-process-card:hover img{
+	filter: brightness(0) invert(1);
+}
+
+.quality-rnd-focus-icon img{
+	width: 35px;
+	height: 35px;
+}
+
+.contact-icon img{
+	width: 40px;
+	height: 40px;
+}
+.custom-file {
+	position: relative;
+}
+
+.custom-file .file-placeholder {
+	position: absolute;
+	left: 140px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #fff; /* change color as needed */
+	pointer-events: none;
+}
+
+.custom-file input[type="file"] {
+	color: transparent;
+}
+
+.custom-file input[type="file"]::file-selector-button {
+	color: #000;
+}
+
+.hero-btn-primary:hover{
+	color:#fff;
+}
+.no-topic p{
+	padding: 10px 0;
+}
+.article-content ul{
+	margin-left: 15px;
+}
+.article-content ul li{
+	list-style-type: disc;
+}
+.article-content ol li{
+	list-style-type: auto;
+}
+.article-content ul,
+.article-content ol {
+    margin: 0 0 20px;
+    padding-left: 30px;
+    color: var(--phantom-light);
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.article-content li {
+    margin: 0 0 6px;
+    padding: 0;
+}
+
+.article-content li:last-child {
+    margin-bottom: 0;
+}
+
+.article-content img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+}
+
+.article-content img.alignleft,
+.article-content img.alignright,
+.article-content img.alignnone {
+    float: none;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.article-content iframe,
+.article-content video {
+    max-width: 100%;
+}
+
+.article-content table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+}
+
+.article-content th,
+.article-content td {
+    padding: 10px;
+    overflow-wrap: break-word;
+    vertical-align: top;
+}
+
+.article-content > :last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1440px) {
+    .article-content h2 {
+        font-size: 28px;
+        margin: 28px 0 14px;
+    }
+
+    .article-content p {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 19px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        padding-left: 28px;
+        margin-bottom: 19px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .article-content h2 {
+        font-size: 26px;
+        line-height: 1.35;
+        margin: 26px 0 12px;
+    }
+
+    .article-content p {
+        font-size: 15.5px;
+        line-height: 1.8;
+        margin-bottom: 18px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 15.5px;
+        line-height: 1.8;
+        padding-left: 26px;
+        margin-bottom: 18px;
+    }
+}
+
+@media (max-width: 991px) {
+    .article-content h2 {
+        font-size: 25px;
+        line-height: 1.35;
+        margin: 24px 0 12px;
+        letter-spacing: -0.02em;
+    }
+
+    .article-content p {
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 17px;
+    }
+
+    .article-content p + h2 {
+        margin-top: 25px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 15px;
+        padding-left: 24px;
+        margin-bottom: 17px;
+    }
+
+    .article-content img {
+        margin: 18px 0;
+    }
+}
+@media (max-width: 850px) {
+    .article-content h2 {
+        font-size: 24px;
+        line-height: 1.4;
+        margin: 23px 0 11px;
+    }
+
+    .article-content p {
+        font-size: 15px;
+        line-height: 1.75;
+        margin-bottom: 16px;
+    }
+
+    .article-content p + h2 {
+        margin-top: 23px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 15px;
+        line-height: 1.75;
+        padding-left: 22px;
+        margin-bottom: 16px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .article-content h2 {
+        font-size: 23px;
+        line-height: 1.4;
+        margin: 22px 0 10px;
+        letter-spacing: -0.015em;
+    }
+
+    .article-content p {
+        font-size: 15px;
+        line-height: 1.75;
+        margin-bottom: 15px;
+    }
+
+    .article-content p + h2 {
+        margin-top: 22px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 15px;
+        padding-left: 21px;
+        margin-bottom: 15px;
+    }
+
+    .article-content img {
+        margin: 16px 0;
+    }
+
+    .article-content th,
+    .article-content td {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .article-content h2 {
+        font-size: 21px;
+        line-height: 1.4;
+        margin: 20px 0 10px;
+        letter-spacing: -0.01em;
+    }
+
+    .article-content p {
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 14px;
+    }
+
+    .article-content p + h2 {
+        margin-top: 20px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 14px;
+        line-height: 1.8;
+        padding-left: 20px;
+        margin-bottom: 14px;
+    }
+
+    .article-content li {
+        margin-bottom: 5px;
+    }
+
+    .article-content img {
+        margin: 14px 0;
+    }
+
+    .article-content table {
+        font-size: 13px;
+    }
+
+    .article-content th,
+    .article-content td {
+        padding: 7px 6px;
+    }
+}
+
+@media (max-width: 450px) {
+    .article-content h2 {
+        font-size: 19px;
+        line-height: 1.45;
+        margin: 18px 0 9px;
+        letter-spacing: 0;
+    }
+
+    .article-content p {
+        font-size: 14px;
+        line-height: 1.75;
+        margin-bottom: 13px;
+    }
+
+    .article-content p + h2 {
+        margin-top: 19px;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        font-size: 14px;
+        line-height: 1.75;
+        padding-left: 19px;
+        margin-bottom: 13px;
+    }
+
+    .article-content img {
+        margin: 12px 0;
+    }
+
+    .article-content th,
+    .article-content td {
+        padding: 6px 5px;
+    }
+}
